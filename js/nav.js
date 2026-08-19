@@ -43,4 +43,32 @@
     if (header) header.classList.remove("is-open");
     if (toggle) toggle.setAttribute("aria-expanded", "false");
   });
+
+  const hero = document.querySelector(".hero");
+  const scene = document.querySelector(".hero-scene");
+  const fadeEl = document.querySelector(".hero-scene-fade");
+  let ticking = false;
+  let lastFade = -1;
+
+  function updateBgFade() {
+    ticking = false;
+    if (!hero || !scene || !fadeEl) return;
+    const range = Math.max(hero.offsetHeight * 0.85, 1);
+    const fade = Math.min(1, Math.max(0, window.scrollY / range));
+    const stepped = Math.round(fade * 24) / 24;
+    if (stepped === lastFade) return;
+    lastFade = stepped;
+    fadeEl.style.opacity = String(stepped);
+    scene.classList.toggle("is-done", stepped >= 1);
+  }
+
+  function onScrollOrResize() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(updateBgFade);
+  }
+
+  updateBgFade();
+  window.addEventListener("scroll", onScrollOrResize, { passive: true });
+  window.addEventListener("resize", onScrollOrResize);
 })();
