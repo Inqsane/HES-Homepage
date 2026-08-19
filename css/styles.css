@@ -88,8 +88,8 @@ a {
   height: 38px;
   display: grid;
   place-items: center;
-  border: 1px solid var(--water-dim);
-  background: linear-gradient(180deg, rgba(60, 224, 207, 0.18), rgba(60, 224, 207, 0.04));
+  border: none;
+  background: none;
   color: var(--water);
   font-family: var(--display);
   font-weight: 700;
